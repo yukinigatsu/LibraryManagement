@@ -27,18 +27,174 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        nameBookLabel2 = new javax.swing.JLabel();
+        searchBookButton = new javax.swing.JButton();
+        enterIdBookTextField = new javax.swing.JTextField();
+        idBookLabel = new javax.swing.JLabel();
+        nameBookLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        serchButton = new javax.swing.JButton();
+        typeSearchComboBox = new javax.swing.JComboBox<>();
+        clearButton = new javax.swing.JButton();
+        keywordTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        readersTable = new javax.swing.JTable();
+        limitLabel = new javax.swing.JLabel();
+        limitValueLabel = new javax.swing.JLabel();
+        addButton = new javax.swing.JButton();
+
         setClosable(true);
         setTitle("Thêm sách mượn");
+
+        nameBookLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        searchBookButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        searchBookButton.setText("Tìm");
+
+        enterIdBookTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        idBookLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        idBookLabel.setText("Mã sách:");
+
+        nameBookLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nameBookLabel1.setText("Tên sách:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(idBookLabel)
+                    .addComponent(nameBookLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(enterIdBookTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchBookButton)
+                        .addContainerGap(526, Short.MAX_VALUE))
+                    .addComponent(nameBookLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterIdBookTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchBookButton)
+                    .addComponent(idBookLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameBookLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameBookLabel1))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        serchButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        serchButton.setText("Tìm");
+
+        typeSearchComboBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        typeSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã thẻ", "Tên" }));
+
+        clearButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        clearButton.setText("Xoá");
+
+        keywordTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        readersTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        readersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mã thẻ", "Họ và tên", "Đơn vị"
+            }
+        ));
+        jScrollPane1.setViewportView(readersTable);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43)
+                        .addComponent(serchButton)
+                        .addGap(35, 35, 35)
+                        .addComponent(clearButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serchButton)
+                    .addComponent(clearButton))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        limitLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        limitLabel.setText("Số lượng sách đã mượn:");
+
+        limitValueLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        limitValueLabel.setText("0/5");
+
+        addButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        addButton.setText("THÊM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1027, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(limitLabel)
+                .addGap(18, 18, 18)
+                .addComponent(limitValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addButton)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 935, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(limitLabel)
+                    .addComponent(limitValueLabel))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addButton)
+                .addContainerGap(392, Short.MAX_VALUE))
         );
 
         pack();
@@ -46,5 +202,21 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JTextField enterIdBookTextField;
+    private javax.swing.JLabel idBookLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField keywordTextField;
+    private javax.swing.JLabel limitLabel;
+    private javax.swing.JLabel limitValueLabel;
+    private javax.swing.JLabel nameBookLabel1;
+    private javax.swing.JLabel nameBookLabel2;
+    private javax.swing.JTable readersTable;
+    private javax.swing.JButton searchBookButton;
+    private javax.swing.JButton serchButton;
+    private javax.swing.JComboBox<String> typeSearchComboBox;
     // End of variables declaration//GEN-END:variables
 }
