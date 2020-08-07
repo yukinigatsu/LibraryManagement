@@ -50,6 +50,11 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
 
         clearButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         clearButton.setText("Xoá");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         keywordTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -165,6 +170,10 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        keywordTextField.setText("");
+    }//GEN-LAST:event_clearButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -16,6 +16,8 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
      */
     public ReaderListInternalFrame() {
         initComponents();
+        saveButton.setVisible(false);
+        cancelButton.setVisible(false);
     }
 
     /**
@@ -27,24 +29,391 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        typeSearchComboBox = new javax.swing.JComboBox<>();
+        keywordTextField = new javax.swing.JTextField();
+        serchButton = new javax.swing.JButton();
+        clearButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        infoPanel = new javax.swing.JPanel();
+        idTextField = new javax.swing.JTextField();
+        genderLabel = new javax.swing.JLabel();
+        studentRadioButton = new javax.swing.JRadioButton();
+        phoneTextField = new javax.swing.JTextField();
+        phoneLabel = new javax.swing.JLabel();
+        femaleRadioButton = new javax.swing.JRadioButton();
+        staffRadioButton = new javax.swing.JRadioButton();
+        idLabel = new javax.swing.JLabel();
+        nameTextField = new javax.swing.JTextField();
+        infoLabel = new javax.swing.JLabel();
+        typeLabel = new javax.swing.JLabel();
+        birthdayLabel = new javax.swing.JLabel();
+        unitLabel = new javax.swing.JLabel();
+        unitTextField = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
+        birthFormattedTextField = new javax.swing.JFormattedTextField();
+        maleRadioButton = new javax.swing.JRadioButton();
+        buttonPanel = new javax.swing.JPanel();
+        unblockButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        extensionButton = new javax.swing.JButton();
+        blockButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+
         setClosable(true);
         setTitle("Danh sách người đọc");
+
+        typeSearchComboBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        typeSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã thẻ", "Tên" }));
+
+        keywordTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        serchButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        serchButton.setText("Tìm");
+
+        clearButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        clearButton.setText("Xoá");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Danh Sách Người Đọc", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 14))); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Mã số", "Họ và tên", "Loại", "Đơn vị", "Trạng thái", "Vô hiệu hoá"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        idTextField.setEditable(false);
+        idTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        genderLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        genderLabel.setText("Giới tính:");
+
+        studentRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        studentRadioButton.setText("Học sinh");
+
+        phoneTextField.setEditable(false);
+        phoneTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        phoneLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        phoneLabel.setText("Số điện thoại:");
+
+        femaleRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        femaleRadioButton.setText("Nữ");
+
+        staffRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        staffRadioButton.setText("Giáo viên");
+
+        idLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        idLabel.setText("Mã thẻ:");
+
+        nameTextField.setEditable(false);
+        nameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        infoLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        infoLabel.setText("THÔNG TIN");
+
+        typeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        typeLabel.setText("Loại:");
+
+        birthdayLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        birthdayLabel.setText("Ngày sinh:");
+
+        unitLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        unitLabel.setText("Đơn vị:");
+
+        unitTextField.setEditable(false);
+        unitTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        nameLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nameLabel.setText("Họ và tên:");
+
+        birthFormattedTextField.setEditable(false);
+        birthFormattedTextField.setText("01/01/2020");
+        birthFormattedTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        maleRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        maleRadioButton.setText("Nam");
+
+        javax.swing.GroupLayout infoPanelLayout = new javax.swing.GroupLayout(infoPanel);
+        infoPanel.setLayout(infoPanelLayout);
+        infoPanelLayout.setHorizontalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(infoPanelLayout.createSequentialGroup()
+                        .addComponent(infoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(infoPanelLayout.createSequentialGroup()
+                        .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(birthdayLabel)
+                            .addComponent(genderLabel)
+                            .addComponent(phoneLabel)
+                            .addComponent(typeLabel)
+                            .addComponent(unitLabel))
+                        .addGap(23, 23, 23)
+                        .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(unitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(infoPanelLayout.createSequentialGroup()
+                                .addComponent(studentRadioButton)
+                                .addGap(42, 42, 42)
+                                .addComponent(staffRadioButton))
+                            .addGroup(infoPanelLayout.createSequentialGroup()
+                                .addComponent(maleRadioButton)
+                                .addGap(62, 62, 62)
+                                .addComponent(femaleRadioButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoPanelLayout.createSequentialGroup()
+                                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(phoneTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(birthFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2))))
+                    .addGroup(infoPanelLayout.createSequentialGroup()
+                        .addComponent(nameLabel)
+                        .addGap(48, 48, 48)
+                        .addComponent(nameTextField))
+                    .addGroup(infoPanelLayout.createSequentialGroup()
+                        .addComponent(idLabel)
+                        .addGap(67, 67, 67)
+                        .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
+        infoPanelLayout.setVerticalGroup(
+            infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(infoPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(infoLabel)
+                .addGap(21, 21, 21)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idLabel)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdayLabel)
+                    .addComponent(birthFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(genderLabel)
+                    .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(maleRadioButton)
+                        .addComponent(femaleRadioButton)))
+                .addGap(18, 18, 18)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneLabel)
+                    .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typeLabel)
+                    .addComponent(studentRadioButton)
+                    .addComponent(staffRadioButton))
+                .addGap(18, 18, 18)
+                .addGroup(infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(unitLabel)
+                    .addComponent(unitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+
+        unblockButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        unblockButton.setText("Gỡ Khoá");
+
+        cancelButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        cancelButton.setText("Huỷ");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+
+        extensionButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        extensionButton.setText("Gia Hạn");
+
+        blockButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        blockButton.setText("Khoá Thẻ");
+
+        editButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        editButton.setText("Sửa");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        saveButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        saveButton.setText("Lưu");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout buttonPanelLayout = new javax.swing.GroupLayout(buttonPanel);
+        buttonPanel.setLayout(buttonPanelLayout);
+        buttonPanelLayout.setHorizontalGroup(
+            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(extensionButton)
+                    .addGroup(buttonPanelLayout.createSequentialGroup()
+                        .addComponent(editButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(saveButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(cancelButton))
+                    .addGroup(buttonPanelLayout.createSequentialGroup()
+                        .addComponent(blockButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(unblockButton)))
+                .addContainerGap())
+        );
+        buttonPanelLayout.setVerticalGroup(
+            buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buttonPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(editButton)
+                    .addComponent(saveButton)
+                    .addComponent(cancelButton))
+                .addGap(39, 39, 39)
+                .addComponent(extensionButton)
+                .addGap(42, 42, 42)
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(blockButton)
+                    .addComponent(unblockButton))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1027, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(serchButton)
+                                .addGap(35, 35, 35)
+                                .addComponent(clearButton)
+                                .addGap(0, 232, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 935, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(serchButton)
+                    .addComponent(clearButton))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        keywordTextField.setText("");
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        editButton.setVisible(false);
+        saveButton.setVisible(true);
+        cancelButton.setVisible(true);
+        
+        nameTextField.setEditable(true);
+        birthFormattedTextField.setEditable(true);
+        phoneTextField.setEditable(true);
+        unitTextField.setEditable(true);
+    }//GEN-LAST:event_editButtonActionPerformed
+    private void afterSaveOrCancel(){
+        editButton.setVisible(true);
+        saveButton.setVisible(false);
+        cancelButton.setVisible(false);
+        
+        nameTextField.setEditable(false);
+        birthFormattedTextField.setEditable(false);
+        phoneTextField.setEditable(false);
+        unitTextField.setEditable(false);
+    }
+    
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        afterSaveOrCancel();
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        afterSaveOrCancel();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField birthFormattedTextField;
+    private javax.swing.JLabel birthdayLabel;
+    private javax.swing.JButton blockButton;
+    private javax.swing.JPanel buttonPanel;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton clearButton;
+    private javax.swing.JButton editButton;
+    private javax.swing.JButton extensionButton;
+    private javax.swing.JRadioButton femaleRadioButton;
+    private javax.swing.JLabel genderLabel;
+    private javax.swing.JLabel idLabel;
+    private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel infoLabel;
+    private javax.swing.JPanel infoPanel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField keywordTextField;
+    private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel phoneLabel;
+    private javax.swing.JTextField phoneTextField;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JButton serchButton;
+    private javax.swing.JRadioButton staffRadioButton;
+    private javax.swing.JRadioButton studentRadioButton;
+    private javax.swing.JLabel typeLabel;
+    private javax.swing.JComboBox<String> typeSearchComboBox;
+    private javax.swing.JButton unblockButton;
+    private javax.swing.JLabel unitLabel;
+    private javax.swing.JTextField unitTextField;
     // End of variables declaration//GEN-END:variables
 }

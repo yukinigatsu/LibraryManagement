@@ -33,6 +33,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         enterIdBookTextField = new javax.swing.JTextField();
         idBookLabel = new javax.swing.JLabel();
         nameBookLabel1 = new javax.swing.JLabel();
+        clearButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         serchButton = new javax.swing.JButton();
         typeSearchComboBox = new javax.swing.JComboBox<>();
@@ -60,6 +61,14 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         nameBookLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nameBookLabel1.setText("Tên sách:");
 
+        clearButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        clearButton1.setText("Xoá");
+        clearButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -75,7 +84,9 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                         .addComponent(enterIdBookTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(searchBookButton)
-                        .addContainerGap(526, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(clearButton1)
+                        .addContainerGap())
                     .addComponent(nameBookLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -85,7 +96,8 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enterIdBookTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBookButton)
-                    .addComponent(idBookLabel))
+                    .addComponent(idBookLabel)
+                    .addComponent(clearButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nameBookLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -101,6 +113,11 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
 
         clearButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         clearButton.setText("Xoá");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         keywordTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -134,7 +151,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                         .addComponent(serchButton)
                         .addGap(35, 35, 35)
                         .addComponent(clearButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 208, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -165,21 +182,23 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(limitLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(limitValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(limitLabel)
-                .addGap(18, 18, 18)
-                .addComponent(limitValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(105, 105, 105)
                 .addComponent(addButton)
-                .addGap(95, 95, 95))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,16 +213,25 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addButton)
-                .addContainerGap(392, Short.MAX_VALUE))
+                .addContainerGap(396, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        keywordTextField.setText("");
+    }//GEN-LAST:event_clearButtonActionPerformed
+
+    private void clearButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButton1ActionPerformed
+        enterIdBookTextField.setText("");
+    }//GEN-LAST:event_clearButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JButton clearButton;
+    private javax.swing.JButton clearButton1;
     private javax.swing.JTextField enterIdBookTextField;
     private javax.swing.JLabel idBookLabel;
     private javax.swing.JPanel jPanel1;

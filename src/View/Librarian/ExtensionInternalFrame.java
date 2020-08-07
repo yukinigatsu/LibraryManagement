@@ -50,6 +50,11 @@ public class ExtensionInternalFrame extends javax.swing.JInternalFrame {
 
         clearButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         clearButton.setText("Xoá");
+        clearButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearButtonActionPerformed(evt);
+            }
+        });
 
         keywordTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -118,7 +123,6 @@ public class ExtensionInternalFrame extends javax.swing.JInternalFrame {
 
         extensionButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         extensionButton.setText("GIA HẠN");
-        extensionButton.setActionCommand("GIA HẠN");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -165,6 +169,10 @@ public class ExtensionInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
+        keywordTextField.setText("");
+    }//GEN-LAST:event_clearButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
