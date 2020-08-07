@@ -27,18 +27,186 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        genderButtonGroup = new javax.swing.ButtonGroup();
+        typeButtonGroup = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        idTextField = new javax.swing.JTextField();
+        genderLabel = new javax.swing.JLabel();
+        studentRadioButton = new javax.swing.JRadioButton();
+        phoneTextField = new javax.swing.JTextField();
+        phoneLabel = new javax.swing.JLabel();
+        femaleRadioButton = new javax.swing.JRadioButton();
+        staffRadioButton = new javax.swing.JRadioButton();
+        idLabel = new javax.swing.JLabel();
+        nameTextField = new javax.swing.JTextField();
+        infoLabel = new javax.swing.JLabel();
+        typeLabel = new javax.swing.JLabel();
+        birthdayLabel = new javax.swing.JLabel();
+        unitLabel = new javax.swing.JLabel();
+        unitTextField = new javax.swing.JTextField();
+        nameLabel = new javax.swing.JLabel();
+        birthFormattedTextField = new javax.swing.JFormattedTextField();
+        maleRadioButton = new javax.swing.JRadioButton();
+        addButton = new javax.swing.JButton();
+
         setClosable(true);
         setTitle("Thêm thẻ người đọc mới");
+
+        idTextField.setEditable(false);
+        idTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        genderLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        genderLabel.setText("Giới tính:");
+
+        typeButtonGroup.add(studentRadioButton);
+        studentRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        studentRadioButton.setText("Học sinh");
+
+        phoneTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        phoneLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        phoneLabel.setText("Số điện thoại:");
+
+        genderButtonGroup.add(femaleRadioButton);
+        femaleRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        femaleRadioButton.setText("Nữ");
+
+        typeButtonGroup.add(staffRadioButton);
+        staffRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        staffRadioButton.setText("Giáo viên");
+
+        idLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        idLabel.setText("Mã thẻ:");
+
+        nameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        infoLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        infoLabel.setText("THÔNG TIN NGƯỜI ĐỌC");
+
+        typeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        typeLabel.setText("Loại:");
+
+        birthdayLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        birthdayLabel.setText("Ngày sinh:");
+
+        unitLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        unitLabel.setText("Đơn vị:");
+
+        unitTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        nameLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nameLabel.setText("Họ và tên:");
+
+        birthFormattedTextField.setText("01/01/2020");
+        birthFormattedTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        genderButtonGroup.add(maleRadioButton);
+        maleRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        maleRadioButton.setText("Nam");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(birthdayLabel)
+                            .addComponent(genderLabel)
+                            .addComponent(phoneLabel)
+                            .addComponent(typeLabel)
+                            .addComponent(unitLabel))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(unitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(studentRadioButton)
+                                .addGap(42, 42, 42)
+                                .addComponent(staffRadioButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(maleRadioButton)
+                                .addGap(62, 62, 62)
+                                .addComponent(femaleRadioButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(phoneTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(birthFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(nameLabel)
+                            .addGap(48, 48, 48)
+                            .addComponent(nameTextField))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(idLabel)
+                            .addGap(67, 67, 67)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(infoLabel)
+                                .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(infoLabel)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idLabel)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameLabel)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(birthdayLabel)
+                    .addComponent(birthFormattedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(genderLabel)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(maleRadioButton)
+                        .addComponent(femaleRadioButton)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneLabel)
+                    .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(typeLabel)
+                    .addComponent(studentRadioButton)
+                    .addComponent(staffRadioButton))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(unitLabel)
+                    .addComponent(unitTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        addButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        addButton.setText("THÊM");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1027, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(246, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(addButton)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(283, 283, 283))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 935, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addButton)
+                .addContainerGap(517, Short.MAX_VALUE))
         );
 
         pack();
@@ -46,5 +214,26 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JFormattedTextField birthFormattedTextField;
+    private javax.swing.JLabel birthdayLabel;
+    private javax.swing.JRadioButton femaleRadioButton;
+    private javax.swing.ButtonGroup genderButtonGroup;
+    private javax.swing.JLabel genderLabel;
+    private javax.swing.JLabel idLabel;
+    private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel infoLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel phoneLabel;
+    private javax.swing.JTextField phoneTextField;
+    private javax.swing.JRadioButton staffRadioButton;
+    private javax.swing.JRadioButton studentRadioButton;
+    private javax.swing.ButtonGroup typeButtonGroup;
+    private javax.swing.JLabel typeLabel;
+    private javax.swing.JLabel unitLabel;
+    private javax.swing.JTextField unitTextField;
     // End of variables declaration//GEN-END:variables
 }

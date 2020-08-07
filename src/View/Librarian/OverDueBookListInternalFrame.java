@@ -33,15 +33,16 @@ public class OverDueBookListInternalFrame extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("Danh sách sách quá hạn trả");
 
+        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Họ và tên", "Đơn vị", "Tên sách", "Ngày trả"
+                "STT", "Mã thẻ", "Họ và tên", "Đơn vị", "Tên sách", "Ngày trả"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

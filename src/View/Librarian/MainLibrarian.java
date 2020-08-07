@@ -16,6 +16,7 @@ public class MainLibrarian extends javax.swing.JFrame {
      */
     public MainLibrarian() {
         initComponents();
+
     }
 
     /**
@@ -29,18 +30,19 @@ public class MainLibrarian extends javax.swing.JFrame {
 
         headerPanel = new javax.swing.JPanel();
         adminHomeLabel = new javax.swing.JLabel();
-        adminLabel = new javax.swing.JLabel();
+        librarianLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         mainDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        addBorrowedBook = new javax.swing.JMenuItem();
+        returnBook = new javax.swing.JMenuItem();
+        extension = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        creatReaderCard = new javax.swing.JMenuItem();
+        readerList = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        overDuaBookList = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,9 +50,10 @@ public class MainLibrarian extends javax.swing.JFrame {
         adminHomeLabel.setText("TRANG CHỦ THỦ THƯ");
         adminHomeLabel.setToolTipText("");
 
-        adminLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        adminLabel.setText("username");
-        adminLabel.setToolTipText("");
+        librarianLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        librarianLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
+        librarianLabel.setText("username");
+        librarianLabel.setToolTipText("");
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -60,7 +63,7 @@ public class MainLibrarian extends javax.swing.JFrame {
                 .addContainerGap(365, Short.MAX_VALUE)
                 .addComponent(adminHomeLabel)
                 .addGap(296, 296, 296)
-                .addComponent(adminLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(librarianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -69,7 +72,7 @@ public class MainLibrarian extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(adminLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(librarianLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(adminHomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -79,29 +82,72 @@ public class MainLibrarian extends javax.swing.JFrame {
         mainDesktopPane.setLayout(new java.awt.BorderLayout());
 
         jMenu1.setText("Quản lý mượn sách");
+        jMenu1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jMenuItem1.setText("Thêm sách mượn");
-        jMenu1.add(jMenuItem1);
+        addBorrowedBook.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        addBorrowedBook.setText("Thêm sách mượn");
+        addBorrowedBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBorrowedBookActionPerformed(evt);
+            }
+        });
+        jMenu1.add(addBorrowedBook);
 
-        jMenuItem2.setText("Trả sách");
-        jMenu1.add(jMenuItem2);
+        returnBook.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        returnBook.setText("Trả sách");
+        returnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnBookActionPerformed(evt);
+            }
+        });
+        jMenu1.add(returnBook);
 
-        jMenuItem3.setText("Gia hạn mượn sách");
-        jMenu1.add(jMenuItem3);
+        extension.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        extension.setText("Gia hạn mượn sách");
+        extension.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extensionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(extension);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Quản lý người đọc");
+        jMenu2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        jMenuItem4.setText("Thêm mới thẻ người đọc");
-        jMenu2.add(jMenuItem4);
+        creatReaderCard.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        creatReaderCard.setText("Thêm mới thẻ người đọc");
+        creatReaderCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creatReaderCardActionPerformed(evt);
+            }
+        });
+        jMenu2.add(creatReaderCard);
 
-        jMenuItem5.setText("Danh sách người đọc");
-        jMenu2.add(jMenuItem5);
+        readerList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        readerList.setText("Danh sách người đọc");
+        readerList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readerListActionPerformed(evt);
+            }
+        });
+        jMenu2.add(readerList);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Sách quá hạn");
+        jMenu3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
+        overDuaBookList.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        overDuaBookList.setText("Danh sách sách quá hạn");
+        overDuaBookList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                overDuaBookListActionPerformed(evt);
+            }
+        });
+        jMenu3.add(overDuaBookList);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -122,12 +168,48 @@ public class MainLibrarian extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
+                .addComponent(mainDesktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 838, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addBorrowedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBorrowedBookActionPerformed
+        BorrowBookInternalFrame f = new BorrowBookInternalFrame();
+        f.setVisible(true);
+        this.mainDesktopPane.add(f);
+    }//GEN-LAST:event_addBorrowedBookActionPerformed
+
+    private void returnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBookActionPerformed
+        ReturnBookInternalFrame f = new ReturnBookInternalFrame();
+        f.setVisible(true);
+        this.mainDesktopPane.add(f);
+    }//GEN-LAST:event_returnBookActionPerformed
+
+    private void extensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extensionActionPerformed
+        ExtensionInternalFrame f = new ExtensionInternalFrame();
+        f.setVisible(true);
+        this.mainDesktopPane.add(f);
+    }//GEN-LAST:event_extensionActionPerformed
+
+    private void creatReaderCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatReaderCardActionPerformed
+        CreateNewReaderInternalFrame f = new CreateNewReaderInternalFrame();
+        f.setVisible(true);
+        this.mainDesktopPane.add(f);
+    }//GEN-LAST:event_creatReaderCardActionPerformed
+
+    private void readerListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readerListActionPerformed
+        ReaderListInternalFrame f = new ReaderListInternalFrame();
+        f.setVisible(true);
+        this.mainDesktopPane.add(f);
+    }//GEN-LAST:event_readerListActionPerformed
+
+    private void overDuaBookListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_overDuaBookListActionPerformed
+        OverDueBookListInternalFrame f = new OverDueBookListInternalFrame();
+        f.setVisible(true);
+        this.mainDesktopPane.add(f);
+    }//GEN-LAST:event_overDuaBookListActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,19 +248,20 @@ public class MainLibrarian extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem addBorrowedBook;
     private javax.swing.JLabel adminHomeLabel;
-    private javax.swing.JLabel adminLabel;
+    private javax.swing.JMenuItem creatReaderCard;
+    private javax.swing.JMenuItem extension;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel librarianLabel;
     private javax.swing.JDesktopPane mainDesktopPane;
+    private javax.swing.JMenuItem overDuaBookList;
+    private javax.swing.JMenuItem readerList;
+    private javax.swing.JMenuItem returnBook;
     // End of variables declaration//GEN-END:variables
 }
