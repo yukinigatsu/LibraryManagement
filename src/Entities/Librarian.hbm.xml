@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 14, 2020 10:23:29 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.Librarian" table="librarian" catalog="librarymanagementdb" optimistic-lock="version">
+        <id name="idLibrarian" type="int">
+            <column name="`id librarian`" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="account" class="Entities.Account" fetch="select">
+            <column name="`id account`" not-null="true" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        <property name="birthday" type="date">
+            <column name="birthday" length="10" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="3" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="10" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="60" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 14, 2020 10:23:29 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.Reader" table="reader" catalog="librarymanagementdb" optimistic-lock="version">
+        <id name="idReader" type="int">
+            <column name="`id reader`" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="50" not-null="true" />
+        </property>
+        <property name="birthday" type="date">
+            <column name="birthday" length="10" not-null="true" />
+        </property>
+        <property name="gender" type="string">
+            <column name="gender" length="3" not-null="true" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="7" not-null="true" />
+        </property>
+        <property name="unit" type="string">
+            <column name="unit" length="50" not-null="true" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="10" />
+        </property>
+        <property name="isExpired" type="byte">
+            <column name="isExpired" not-null="true" />
+        </property>
+        <property name="isBlocked" type="byte">
+            <column name="isBlocked" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="`create time`" length="19" not-null="true" />
+        </property>
+        <property name="lastMortifiedTime" type="timestamp">
+            <column name="`last mortified time`" length="19" not-null="true" />
+        </property>
+        <set name="borrowedBooks" table="`borrowed book`" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="`id reader`" not-null="true" />
+            </key>
+            <one-to-many class="Entities.BorrowedBook" />
+        </set>
+    </class>
+</hibernate-mapping>
