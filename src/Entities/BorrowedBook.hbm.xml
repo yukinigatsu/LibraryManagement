@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 14, 2020 10:23:29 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.BorrowedBook" table="`borrowed book`" catalog="librarymanagementdb" optimistic-lock="version">
+        <composite-id name="id" class="Entities.BorrowedBookId">
+            <key-property name="idReader" type="int">
+                <column name="`id reader`" />
+            </key-property>
+            <key-property name="idBook" type="int">
+                <column name="`id book`" />
+            </key-property>
+            <key-property name="borrowedDate" type="timestamp">
+                <column name="`borrowed date`" length="19" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="book" class="Entities.Book" update="false" insert="false" fetch="select">
+            <column name="`id book`" not-null="true" />
+        </many-to-one>
+        <many-to-one name="reader" class="Entities.Reader" update="false" insert="false" fetch="select">
+            <column name="`id reader`" not-null="true" />
+        </many-to-one>
+        <property name="expiredDate" type="timestamp">
+            <column name="`expired date`" length="19" not-null="true" />
+        </property>
+        <property name="isReturn" type="byte">
+            <column name="isReturn" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
