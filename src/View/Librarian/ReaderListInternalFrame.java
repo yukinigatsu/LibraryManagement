@@ -43,7 +43,7 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
         dtm.addColumn("Loại");
         dtm.addColumn("Đơn vị");
         dtm.addColumn("Trạng thái");
-        dtm.addColumn("Vô hiệu hoá");
+        dtm.addColumn("Khoá thẻ");
         String status = new String();
         String isBlock = new String();
         String type = new String();
@@ -669,7 +669,7 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
             Reader iReader = new Reader();
             iReader = ReaderList.get(row);
             if (iReader.getIsBlocked() != 1) {
-                iReader.setIsExpired((byte) 1);
+                iReader.setIsBlocked((byte) 1);
                 if (rdao.updateReader(iReader)) {
                     JOptionPane.showMessageDialog(this, "Đã khoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                     ReaderList.get(row).setIsBlocked((byte) 1);
@@ -691,7 +691,7 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
         Reader iReader = new Reader();
         iReader = ReaderList.get(row);
         if(iReader.getIsBlocked() == 1){
-            iReader.setIsExpired((byte) 0);
+            iReader.setIsBlocked((byte) 0);
             if(rdao.updateReader(iReader)){
                 JOptionPane.showMessageDialog(this, "Đã gỡ khoá", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 ReaderList.get(row).setIsBlocked((byte) 0);
