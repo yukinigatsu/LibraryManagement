@@ -2,6 +2,8 @@ package Entities;
 // Generated Aug 14, 2020 10:23:28 PM by Hibernate Tools 4.3.1
 
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,6 +81,34 @@ public class Account  implements java.io.Serializable {
        this.librarians = iAccount.librarians;
     }
     
+    //Hash password by MD5
+    //Reference: https://www.geeksforgeeks.org/md5-hash-in-java/
+    public String getMD5Hash(String password){
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(password.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashPassword = no.toString(16);
+            while (hashPassword.length() < 32) {
+                hashPassword = "0" + hashPassword;
+            }
+            return hashPassword;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    //Check password
+    public boolean checkPassword(String passString){
+        String hashPass = getMD5Hash(passString);
+        if(hashPass.compareTo(password) == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
+
 
 }
 

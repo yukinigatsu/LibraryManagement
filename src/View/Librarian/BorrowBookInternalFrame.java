@@ -77,11 +77,11 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         clearButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         searchReaderButton = new javax.swing.JButton();
-        typeSearchComboBox = new javax.swing.JComboBox<>();
         clearButton = new javax.swing.JButton();
         keywordTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         readersTable = new javax.swing.JTable();
+        idReaderLabel = new javax.swing.JLabel();
         limitLabel = new javax.swing.JLabel();
         limitValueLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
@@ -159,9 +159,6 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        typeSearchComboBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        typeSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã thẻ", "Tên" }));
-
         clearButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         clearButton.setText("Xoá");
         clearButton.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +188,9 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(readersTable);
 
+        idReaderLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        idReaderLabel.setText("Mã thẻ");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -200,8 +200,8 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(idReaderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(searchReaderButton)
@@ -215,10 +215,10 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchReaderButton)
-                    .addComponent(clearButton))
+                    .addComponent(clearButton)
+                    .addComponent(idReaderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addContainerGap())
@@ -291,28 +291,17 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private void searchReaderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReaderButtonActionPerformed
         if (!keywordTextField.getText().isEmpty()) {
             ReaderList.clear();
-            if (typeSearchComboBox.getSelectedItem() == "Mã thẻ") {
                 Reader iReader = new Reader();
                 try {
                     iReader = rdao.findReaderById(Integer.parseInt(keywordTextField.getText()));
                     if (iReader != null) {
-                        ReaderList.add(iReader);
-                                    
+                        ReaderList.add(iReader);             
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     
                 }
                 loadDataTable();
-            } else if (typeSearchComboBox.getSelectedItem() == "Tên") {
-                List<Reader> resultList = new ArrayList<Reader>();
-                resultList = rdao.findReaderByName(keywordTextField.getText());
-                if (resultList != null) {
-                    ReaderList.addAll(resultList);                  
-                   resultList.clear();
-                }
-                loadDataTable();
-            }
         }
         else{
             loadDataListReader();
@@ -365,7 +354,11 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         } else if(idBook.isEmpty()){
            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sách!", "Thông báo", JOptionPane.ERROR_MESSAGE);
         } else{
-            if(amountBorrowedBook >= 5){
+            if(ReaderList.get(row).getIsExpired() == 0){
+                JOptionPane.showMessageDialog(this, "Thẻ đã hết hạn!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            } else if(ReaderList.get(row).getIsBlocked() == 1){
+                JOptionPane.showMessageDialog(this, "Thẻ đã bị khoá!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }else if(amountBorrowedBook >= 5){
                 JOptionPane.showMessageDialog(this, "Đã vượt quá số lượng sách được mượn!", "Thông báo", JOptionPane.ERROR_MESSAGE);
             } else{
                  Book tBook = new Book();
@@ -404,6 +397,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton clearButton1;
     private javax.swing.JTextField enterIdBookTextField;
     private javax.swing.JLabel idBookLabel;
+    private javax.swing.JLabel idReaderLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -415,6 +409,5 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable readersTable;
     private javax.swing.JButton searchBookButton;
     private javax.swing.JButton searchReaderButton;
-    private javax.swing.JComboBox<String> typeSearchComboBox;
     // End of variables declaration//GEN-END:variables
 }

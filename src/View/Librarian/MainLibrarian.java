@@ -7,6 +7,7 @@ package View.Librarian;
 
 import Entities.Account;
 import Entities.Librarian;
+import View.General.HomeFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class MainLibrarian extends javax.swing.JFrame {
 
-    private Account account = new Account();
+    private Account librarian = new Account();
     //private Librarian librarian = new Librarian();
             
     public MainLibrarian() {
@@ -23,10 +24,10 @@ public class MainLibrarian extends javax.swing.JFrame {
 
     }
     
-    public MainLibrarian(Account iAccount) {
+    public MainLibrarian(Account iLibrarian) {
         initComponents();
-        account.copyAccount(iAccount);
-        librarianLabel.setText(account.getUsername());
+        librarian.copyAccount(iLibrarian);
+        librarianLabel.setText(librarian.getUsername());
     }
 
     /**
@@ -70,7 +71,8 @@ public class MainLibrarian extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         adminHomeLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        adminHomeLabel.setText("TRANG CHỦ THỦ THƯ");
+        adminHomeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adminHomeLabel.setText("THỦ THƯ");
         adminHomeLabel.setToolTipText("");
 
         librarianLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -88,9 +90,9 @@ public class MainLibrarian extends javax.swing.JFrame {
         headerPanelLayout.setHorizontalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
-                .addContainerGap(368, Short.MAX_VALUE)
-                .addComponent(adminHomeLabel)
-                .addGap(315, 315, 315)
+                .addContainerGap()
+                .addComponent(adminHomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 847, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(librarianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -247,7 +249,7 @@ public class MainLibrarian extends javax.swing.JFrame {
         int opt = JOptionPane.showConfirmDialog(this, "Bạn muốn đăng xuất","Đăng xuất",JOptionPane.YES_OPTION);
         if (opt == JOptionPane.YES_OPTION) {
             this.setVisible(false);
-    
+            new HomeFrame().setVisible(true);
         }
     }//GEN-LAST:event_logoutItem_adActionPerformed
 
