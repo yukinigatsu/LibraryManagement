@@ -10,6 +10,8 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 /**
@@ -43,6 +45,17 @@ public class ReaderDAO {
             }
     }
     
+  public List<Reader> findReaderByName(String strName){
+        try {
+            Criteria c = s.createCriteria(Reader.class);
+            c.add(Restrictions.like("name", strName,MatchMode.ANYWHERE));
+            List<Reader> temp =  c.list();
+            return temp;
+        } catch (Exception e) {
+            return null;
+        }  
+    }
+    
     //Insert new Reader
     public boolean addReader(Reader newReader){
         try {
@@ -52,6 +65,7 @@ public class ReaderDAO {
             return true;
         } catch (Exception e) {
             tr.rollback();
+            e.printStackTrace();
             return false;
         }
     }
@@ -80,6 +94,17 @@ public class ReaderDAO {
             tr.rollback();
             return false;
         }
+    }
+    
+    public Long countReader(){
+        try {
+            Criteria c = s.createCriteria(Reader.class);
+            c.setProjection(Projections.rowCount());
+            Long l = (Long) c.uniqueResult();
+            return l;          
+        } catch (Exception e) {
+            return null;
+        }  
     }
     
     public void closeSessionDAO(){

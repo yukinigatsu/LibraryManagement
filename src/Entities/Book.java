@@ -2,6 +2,7 @@ package Entities;
 // Generated Aug 14, 2020 10:23:28 PM by Hibernate Tools 4.3.1
 
 
+import DAO.BookTitleDAO;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,7 +62,18 @@ public class Book  implements java.io.Serializable {
         this.borrowedBooks = borrowedBooks;
     }
 
-
+    public String bookTitle(){
+        BookTitleDAO btdao = new BookTitleDAO();
+        BookTitle temp = new BookTitle();
+        temp = btdao.findBookTitleById(bookTitle.getIdBookTitle());
+        btdao.closeSessionDAO();
+        if( temp != null){
+            return temp.getName();
+        } else{
+            return "Lỗi: Không tìm thấy sách!";
+        }
+     
+    }
 
 
 }

@@ -71,8 +71,14 @@ public class Account  implements java.io.Serializable {
         this.librarians = librarians;
     }
 
-
-
+    public void copyAccount(Account iAccount) {
+       this.idAccount = iAccount.idAccount;
+       this.username = iAccount.username;
+       this.password = iAccount.password;
+       this.type = iAccount.type;
+       this.librarians = iAccount.librarians;
+    }
+    
 
 }
 

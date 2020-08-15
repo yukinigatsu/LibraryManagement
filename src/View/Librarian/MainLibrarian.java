@@ -5,18 +5,28 @@
  */
 package View.Librarian;
 
+import Entities.Account;
+import Entities.Librarian;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Yukino
  */
 public class MainLibrarian extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
+    private Account account = new Account();
+    //private Librarian librarian = new Librarian();
+            
     public MainLibrarian() {
         initComponents();
 
+    }
+    
+    public MainLibrarian(Account iAccount) {
+        initComponents();
+        account.copyAccount(iAccount);
+        librarianLabel.setText(account.getUsername());
     }
 
     /**
@@ -28,10 +38,12 @@ public class MainLibrarian extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        adminPopupMenu = new javax.swing.JPopupMenu();
+        logoutItem_ad = new javax.swing.JMenuItem();
         headerPanel = new javax.swing.JPanel();
         adminHomeLabel = new javax.swing.JLabel();
-        librarianLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        librarianLabel = new javax.swing.JLabel();
         mainDesktopPane = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -44,6 +56,17 @@ public class MainLibrarian extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         overDuaBookList = new javax.swing.JMenuItem();
 
+        adminPopupMenu.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        logoutItem_ad.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        logoutItem_ad.setText("Đăng xuất");
+        logoutItem_ad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutItem_adActionPerformed(evt);
+            }
+        });
+        adminPopupMenu.add(logoutItem_ad);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         adminHomeLabel.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -54,6 +77,11 @@ public class MainLibrarian extends javax.swing.JFrame {
         librarianLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user.png"))); // NOI18N
         librarianLabel.setText("username");
         librarianLabel.setToolTipText("");
+        librarianLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                librarianLabelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -62,9 +90,9 @@ public class MainLibrarian extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap(368, Short.MAX_VALUE)
                 .addComponent(adminHomeLabel)
-                .addGap(296, 296, 296)
+                .addGap(315, 315, 315)
                 .addComponent(librarianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addContainerGap())
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         headerPanelLayout.setVerticalGroup(
@@ -72,8 +100,8 @@ public class MainLibrarian extends javax.swing.JFrame {
             .addGroup(headerPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(librarianLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(adminHomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(adminHomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(librarianLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -211,6 +239,18 @@ public class MainLibrarian extends javax.swing.JFrame {
         this.mainDesktopPane.add(f);
     }//GEN-LAST:event_overDuaBookListActionPerformed
 
+    private void librarianLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_librarianLabelMouseClicked
+        adminPopupMenu.show(librarianLabel, evt.getX()-20, evt.getY()+10);
+    }//GEN-LAST:event_librarianLabelMouseClicked
+
+    private void logoutItem_adActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutItem_adActionPerformed
+        int opt = JOptionPane.showConfirmDialog(this, "Bạn muốn đăng xuất","Đăng xuất",JOptionPane.YES_OPTION);
+        if (opt == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+    
+        }
+    }//GEN-LAST:event_logoutItem_adActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -242,7 +282,7 @@ public class MainLibrarian extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainLibrarian().setVisible(true);
+                new MainLibrarian(new Account(2, "librarian1", "e10adc3949ba59abbe56e057f20f883e", "librarian")).setVisible(true);
             }
         });
     }
@@ -250,6 +290,7 @@ public class MainLibrarian extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem addBorrowedBook;
     private javax.swing.JLabel adminHomeLabel;
+    private javax.swing.JPopupMenu adminPopupMenu;
     private javax.swing.JMenuItem creatReaderCard;
     private javax.swing.JMenuItem extension;
     private javax.swing.JPanel headerPanel;
@@ -259,6 +300,7 @@ public class MainLibrarian extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel librarianLabel;
+    private javax.swing.JMenuItem logoutItem_ad;
     private javax.swing.JDesktopPane mainDesktopPane;
     private javax.swing.JMenuItem overDuaBookList;
     private javax.swing.JMenuItem readerList;

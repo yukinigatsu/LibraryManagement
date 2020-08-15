@@ -5,18 +5,59 @@
  */
 package View.Librarian;
 
+import DAO.BookDAO;
+import DAO.BorrowedBookDAO;
+import DAO.ReaderDAO;
+import Entities.Book;
+import Entities.BorrowedBook;
+import Entities.BorrowedBookId;
+import Entities.Reader;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Yukino
  */
 public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
-
+    private List<Reader> ReaderList = new ArrayList<Reader>();
+    private int amountBorrowedBook = 0;
+    private ReaderDAO rdao = new ReaderDAO();
+    private BookDAO bdao = new BookDAO();
+    private BorrowedBookDAO bbdao = new BorrowedBookDAO();
     /**
      * Creates new form BorrowBookInternalFrame
      */
     public BorrowBookInternalFrame() {
         initComponents();
+        loadDataListReader();
+        loadDataTable();
     }
+    
+    private void loadDataListReader(){
+       ReaderList.clear();
+       ReaderList = rdao.selectAllReader();
+    }
+    
+    private void loadDataTable(){
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Mã thẻ");
+        dtm.addColumn("Họ và tên");
+        dtm.addColumn("Đơn vị");
+
+        for (Reader i : ReaderList) {
+            dtm.addRow(new Object[]{i.getIdReader(), i.getName(), i.getUnit()});
+        }
+
+        readersTable.setModel(dtm);
+        this.readersTable.repaint();
+        this.readersTable.revalidate();
+        }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,7 +76,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         nameBookLabel1 = new javax.swing.JLabel();
         clearButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        serchButton = new javax.swing.JButton();
+        searchReaderButton = new javax.swing.JButton();
         typeSearchComboBox = new javax.swing.JComboBox<>();
         clearButton = new javax.swing.JButton();
         keywordTextField = new javax.swing.JTextField();
@@ -52,6 +93,11 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
 
         searchBookButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         searchBookButton.setText("Tìm");
+        searchBookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBookButtonActionPerformed(evt);
+            }
+        });
 
         enterIdBookTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
@@ -105,8 +151,13 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        serchButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        serchButton.setText("Tìm");
+        searchReaderButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        searchReaderButton.setText("Tìm");
+        searchReaderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchReaderButtonActionPerformed(evt);
+            }
+        });
 
         typeSearchComboBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         typeSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã thẻ", "Tên" }));
@@ -133,6 +184,11 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 "Mã thẻ", "Họ và tên", "Đơn vị"
             }
         ));
+        readersTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                readersTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(readersTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -148,7 +204,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(serchButton)
+                        .addComponent(searchReaderButton)
                         .addGap(35, 35, 35)
                         .addComponent(clearButton)
                         .addGap(0, 208, Short.MAX_VALUE)))
@@ -161,7 +217,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(serchButton)
+                    .addComponent(searchReaderButton)
                     .addComponent(clearButton))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
@@ -172,10 +228,15 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         limitLabel.setText("Số lượng sách đã mượn:");
 
         limitValueLabel.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        limitValueLabel.setText("0/5");
+        limitValueLabel.setText("1/5");
 
         addButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         addButton.setText("THÊM");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -213,7 +274,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addButton)
-                .addContainerGap(396, Short.MAX_VALUE))
+                .addContainerGap(400, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,6 +287,115 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private void clearButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButton1ActionPerformed
         enterIdBookTextField.setText("");
     }//GEN-LAST:event_clearButton1ActionPerformed
+
+    private void searchReaderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReaderButtonActionPerformed
+        if (!keywordTextField.getText().isEmpty()) {
+            ReaderList.clear();
+            if (typeSearchComboBox.getSelectedItem() == "Mã thẻ") {
+                Reader iReader = new Reader();
+                try {
+                    iReader = rdao.findReaderById(Integer.parseInt(keywordTextField.getText()));
+                    if (iReader != null) {
+                        ReaderList.add(iReader);
+                                    
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    
+                }
+                loadDataTable();
+            } else if (typeSearchComboBox.getSelectedItem() == "Tên") {
+                List<Reader> resultList = new ArrayList<Reader>();
+                resultList = rdao.findReaderByName(keywordTextField.getText());
+                if (resultList != null) {
+                    ReaderList.addAll(resultList);                  
+                   resultList.clear();
+                }
+                loadDataTable();
+            }
+        }
+        else{
+            loadDataListReader();
+            loadDataTable();
+        }
+    }//GEN-LAST:event_searchReaderButtonActionPerformed
+
+    private void readersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_readersTableMouseClicked
+        int row = readersTable.getSelectedRow();
+        List<BorrowedBook> list = new ArrayList<>();
+        list = bbdao.selectBooksNotReturn(ReaderList.get(row));
+        if(list == null || list.isEmpty()){
+           amountBorrowedBook = 0;
+           limitValueLabel.setText("0/5");
+        }else {
+           amountBorrowedBook = list.size();
+           String amount = String.valueOf(amountBorrowedBook)+ "/5";
+           limitValueLabel.setText(amount);
+        }
+        
+    }//GEN-LAST:event_readersTableMouseClicked
+
+    private void searchBookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBookButtonActionPerformed
+        String idBook = enterIdBookTextField.getText();
+        if(idBook.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sách!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else{
+            Book tBook = new Book();
+            tBook = bdao.findBookById(Integer.parseInt(idBook));
+            if(tBook != null){
+                nameBookLabel2.setText(tBook.bookTitle());
+            } else{
+            nameBookLabel2.setText("Lỗi: Không tìm thấy sách!");
+            }
+        }
+    }//GEN-LAST:event_searchBookButtonActionPerformed
+    
+    private Date defineExpiredDate(){
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_YEAR, 21); // add 3 weeks
+        Date expiredDate = c.getTime(); // vân vân.
+        return expiredDate;
+    }
+    
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        int row = readersTable.getSelectedRow();
+        String idBook = enterIdBookTextField.getText();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một người đọc trong danh sách!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else if(idBook.isEmpty()){
+           JOptionPane.showMessageDialog(this, "Vui lòng nhập mã sách!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+        } else{
+            if(amountBorrowedBook >= 5){
+                JOptionPane.showMessageDialog(this, "Đã vượt quá số lượng sách được mượn!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            } else{
+                 Book tBook = new Book();
+                try{ 
+                   tBook = bdao.findBookById(Integer.parseInt(idBook));
+                   if(tBook == null){
+                      JOptionPane.showMessageDialog(this, "Mã sách không tồn tại!", "Thông báo", JOptionPane.ERROR_MESSAGE); 
+                   } else if(!tBook.getStatus().equals("availible")){
+                       JOptionPane.showMessageDialog(this, "Sách đã được mượn trước đó!", "Thông báo", JOptionPane.ERROR_MESSAGE); 
+                   } else{
+                        amountBorrowedBook++;
+                        BorrowedBookId newBBookId = new BorrowedBookId(ReaderList.get(row).getIdReader(), tBook.getIdBook(), new Date());           
+                        BorrowedBook newBorrowedBook =new BorrowedBook(newBBookId, tBook, ReaderList.get(row), defineExpiredDate(), (byte)0);
+                        if(bbdao.addBorrowedBook(newBorrowedBook)){
+                           JOptionPane.showMessageDialog(this, "Thêm sách mượn thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE); 
+                           limitValueLabel.setText(String.valueOf(amountBorrowedBook)+ "/5");
+                           tBook.setStatus("borrowed");
+                           bdao.updateBook(tBook);
+                        } else{
+                           JOptionPane.showMessageDialog(this, "Thêm sách mượn thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);  
+                        } 
+              
+                   }
+                } catch(Exception e){
+                   JOptionPane.showMessageDialog(this, "Mã sách không hợp lệ!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                }        
+            }
+        }
+         
+    }//GEN-LAST:event_addButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -244,7 +414,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel nameBookLabel2;
     private javax.swing.JTable readersTable;
     private javax.swing.JButton searchBookButton;
-    private javax.swing.JButton serchButton;
+    private javax.swing.JButton searchReaderButton;
     private javax.swing.JComboBox<String> typeSearchComboBox;
     // End of variables declaration//GEN-END:variables
 }
