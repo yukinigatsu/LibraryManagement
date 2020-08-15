@@ -2,6 +2,7 @@ package Entities;
 // Generated Aug 14, 2020 10:23:28 PM by Hibernate Tools 4.3.1
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -65,7 +66,16 @@ public class BorrowedBookId  implements java.io.Serializable {
          result = 37 * result + ( getBorrowedDate() == null ? 0 : this.getBorrowedDate().hashCode() );
          return result;
    }   
-
+   
+   //Format date to String "dd/MM/yyyy"
+    public String getStrBorrowedDate(){
+        SimpleDateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return dFormat.format(borrowedDate);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }
 

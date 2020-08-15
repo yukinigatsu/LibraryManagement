@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Aug 14, 2020 10:23:29 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Entities.BookTitle" table="`book title`" catalog="librarymanagementdb" optimistic-lock="version">
+        <id name="idBookTitle" type="java.lang.Integer">
+            <column name="`id book title`" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="100" not-null="true" />
+        </property>
+        <property name="author" type="string">
+            <column name="author" length="100" not-null="true" />
+        </property>
+        <property name="genre" type="string">
+            <column name="genre" length="50" not-null="true" />
+        </property>
+        <property name="publisher" type="string">
+            <column name="publisher" length="100" not-null="true" />
+        </property>
+        <property name="publishedYear" type="string">
+            <column name="`published year`" length="4" not-null="true" />
+        </property>
+        <property name="price" type="int">
+            <column name="price" not-null="true" />
+        </property>
+        <property name="numberOfPages" type="int">
+            <column name="`number of pages`" not-null="true" />
+        </property>
+        <property name="amount" type="int">
+            <column name="amount" not-null="true" />
+        </property>
+        <property name="createdDate" type="timestamp">
+            <column name="`created date`" length="19" not-null="true" />
+        </property>
+        <set name="books" table="book" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="`id book title`" not-null="true" />
+            </key>
+            <one-to-many class="Entities.Book" />
+        </set>
+    </class>
+</hibernate-mapping>

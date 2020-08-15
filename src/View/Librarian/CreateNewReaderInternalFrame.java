@@ -5,17 +5,25 @@
  */
 package View.Librarian;
 
+import DAO.ReaderDAO;
+import Entities.Reader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Yukino
  */
 public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form CreateNewReaderInternalFrame
-     */
+    private ReaderDAO rdao = new ReaderDAO();
+    Long id;
+    
     public CreateNewReaderInternalFrame() {
-        initComponents();
+        initComponents();        
+        id = rdao.countReader() +1 ;
+        idTextField.setText(id.toString());
     }
 
     /**
@@ -60,6 +68,7 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
 
         typeButtonGroup.add(studentRadioButton);
         studentRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        studentRadioButton.setSelected(true);
         studentRadioButton.setText("Học sinh");
 
         phoneTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -102,6 +111,7 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
 
         genderButtonGroup.add(maleRadioButton);
         maleRadioButton.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        maleRadioButton.setSelected(true);
         maleRadioButton.setText("Nam");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -187,6 +197,11 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
 
         addButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         addButton.setText("THÊM");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,6 +226,75 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void restoreInfoReader(){
+        idTextField.setText(id.toString());
+        nameTextField.setText("");
+        birthFormattedTextField.setText("01/01/2020");
+        maleRadioButton.setSelected(true);
+        phoneTextField.setText("");
+        studentRadioButton.setSelected(true);
+        unitTextField.setText("");
+    }
+    
+    private boolean checkValidData(){
+        if(nameTextField.getText().isEmpty() || birthFormattedTextField.getText().isEmpty() || unitTextField.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Vui lòng điền đầy đủ thông tin", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else if(birthFormattedTextField.getText().length() != 10){
+             JOptionPane.showMessageDialog(this, "Ngày sinh không hợp lệ!\nVui lòng kiểm tra lại.", "Thông báo", JOptionPane.ERROR_MESSAGE);
+             return false;
+        }
+        return true;
+    }
+    
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        if (checkValidData()) {
+            String name = new String();
+            String phone = new String();
+            String gender = new String();
+            String typeReader = new String();
+            String unit = new String();
+            name = nameTextField.getText();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date birth = new Date();
+            try {
+                birth = sdf.parse(birthFormattedTextField.getText());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            if (maleRadioButton.isSelected()) {
+                gender = "Nam";
+            } else {
+                gender = "Nữ";
+            }
+            if (studentRadioButton.isSelected()) {
+                typeReader = "student";
+            } else {
+                typeReader = "staff";
+            }
+            unit = unitTextField.getText();
+            Reader newReader = new Reader();
+            newReader.setName(name);
+            newReader.setBirthday(birth);
+            newReader.setGender(gender);
+            newReader.setPhone(phone);
+            newReader.setType(typeReader);
+            newReader.setUnit(unit);
+            newReader.setCreateTime(new Date());
+            newReader.setLastMortifiedTime(new Date());
+            newReader.setIsExpired((byte) 1);
+            newReader.setIsBlocked((byte) 0);
+            if(rdao.addReader(newReader)){
+                 JOptionPane.showMessageDialog(this, "Thẻ người đọc mới được thêm thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                 id++;
+                 restoreInfoReader();
+            }else{
+                 JOptionPane.showMessageDialog(this, "Thêm mới thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        }
+    }//GEN-LAST:event_addButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

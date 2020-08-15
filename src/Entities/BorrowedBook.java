@@ -2,6 +2,7 @@ package Entities;
 // Generated Aug 14, 2020 10:23:28 PM by Hibernate Tools 4.3.1
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -63,8 +64,23 @@ public class BorrowedBook  implements java.io.Serializable {
         this.isReturn = isReturn;
     }
 
-
-
+//Format date to String "dd/MM/yyyy"
+    public String getStrExpiredDate(){
+        SimpleDateFormat dFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return dFormat.format(expiredDate);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+// Check: Borrowed Book is over due
+    public boolean isOverDue(){
+        Date today = new Date();
+        if(today.compareTo(expiredDate) > 0){
+            return true;
+        }
+        return false;
+    }
 
 }
 

@@ -6,8 +6,10 @@
 package DAO;
 
 import Entities.BorrowedBook;
+import Entities.Reader;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -31,18 +33,18 @@ public class BorrowedBookDAO {
         }
         
     }
-   /* 
-    //Find BookTitle by idBookTitle
-    public BorrowedBook findUserByUsername(int idReader, int idBook){
-            try {
-                Criteria c = s.createCriteria(BookTitle.class);
-                c.add(Restrictions.eq("idBookTitle", id));
-               BookTitle uniResult = (BookTitle) c.uniqueResult();             
-                return uniResult;
-            } catch (Exception e) {
-                return null;
-            }
-    }*/
+    
+    public List<BorrowedBook> selectBooksNotReturn(Reader iReader){
+         try {
+            Criteria c = s.createCriteria(BorrowedBook.class);
+            c.add(Restrictions.eq("reader", iReader));
+            c.add(Restrictions.eq("isReturn", (byte) 0));
+            List<BorrowedBook> list = c.list();
+            return list;
+        } catch (Exception e) {
+            return null;
+        }  
+    }
     
     //Insert new BorrowedBook
     public boolean addBorrowedBook(BorrowedBook newBorrowedBook){
@@ -50,10 +52,26 @@ public class BorrowedBookDAO {
             tr = s.beginTransaction();
             s.save(newBorrowedBook);
             tr.commit();
+            tr = null;
             return true;
         } catch (Exception e) {
             tr.rollback();
+            tr = null;
+            e.printStackTrace();
             return false;
+        }
+    }
+    
+    //over due borrowed book list
+    public List<BorrowedBook> overDueList(){
+        try {
+            String HQL = "from BorrowedBook t where t.expiredDate < CURRENT_DATE() and t.isReturn = 0";
+            Query q = s.createQuery(HQL);   
+            List<BorrowedBook> list = q.list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
     
