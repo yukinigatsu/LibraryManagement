@@ -171,7 +171,7 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
 
         infoLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         infoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        infoLabel.setText("THÔNG TIN");
+        infoLabel.setText("THÔNG TIN NGƯỜI ĐỌC");
 
         typeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         typeLabel.setText("Loại:");

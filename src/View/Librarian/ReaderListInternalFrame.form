@@ -304,7 +304,7 @@
               <Font name="Arial" size="24" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="TH&#xd4;NG TIN"/>
+            <Property name="text" type="java.lang.String" value="TH&#xd4;NG TIN NG&#x1af;&#x1edc;I &#x110;&#x1ecc;C"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="typeLabel">
