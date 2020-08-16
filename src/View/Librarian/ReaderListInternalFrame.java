@@ -54,9 +54,9 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
                 type = "Giáo viên";
             }
             if (i.getIsExpired() == 0) {
-                status = "Hết hạn";
+                status = "Vô hiệu hoá";
             } else {
-                status = "Còn hạn";
+                status = "Hoạt động";
             }
             if (i.getIsBlocked() == 1) {
                 isBlock = "Đã khoá";
@@ -126,10 +126,7 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
         readersTable.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         readersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Nguyễn A", "Giáo viên", "Tổ Toán", "Còn hạn", null},
-                {"2", "Nguyễn B", "Học sinh", "8B", "Hết hạn", "Đã khoá"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Mã thẻ", "Họ và tên", "Loại", "Đơn vị", "Trạng thái", "Vô hiệu hoá"
@@ -192,7 +189,6 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
         nameLabel.setText("Họ và tên:");
 
         birthFormattedTextField.setEditable(false);
-        birthFormattedTextField.setText("01/01/2020");
         birthFormattedTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         genderButtonGroup.add(maleRadioButton);
@@ -335,18 +331,15 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(buttonPanelLayout.createSequentialGroup()
-                        .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(saveButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(cancelButton))
+                    .addComponent(editButton)
+                    .addComponent(saveButton)
+                    .addComponent(cancelButton))
+                .addGap(45, 45, 45)
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(unblockButton)
                     .addComponent(extensionButton)
-                    .addGroup(buttonPanelLayout.createSequentialGroup()
-                        .addComponent(blockButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(unblockButton)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(blockButton))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,15 +347,16 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editButton)
-                    .addComponent(saveButton)
-                    .addComponent(cancelButton))
-                .addGap(39, 39, 39)
-                .addComponent(extensionButton)
-                .addGap(42, 42, 42)
+                    .addComponent(extensionButton))
+                .addGap(24, 24, 24)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(blockButton)
-                    .addComponent(unblockButton))
-                .addContainerGap())
+                    .addComponent(saveButton))
+                .addGap(24, 24, 24)
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(unblockButton)
+                    .addComponent(cancelButton))
+                .addGap(59, 59, 59))
         );
 
         searchReaderButton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
@@ -448,7 +442,7 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
                                 .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(98, 98, 98)
                                 .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 125, Short.MAX_VALUE))))
+                                .addGap(0, 122, Short.MAX_VALUE))))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -640,25 +634,29 @@ public class ReaderListInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_readersTableMouseClicked
 
     private void extensionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extensionButtonActionPerformed
-       int row = readersTable.getSelectedRow();
-       if(row == -1){
-           JOptionPane.showMessageDialog(this, "Vui lòng chọn một người đọc trong danh sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
-       } else {
-        Reader iReader = new Reader();
-        iReader = ReaderList.get(row);
-        if(iReader.getIsExpired() != 1){
-            iReader.setIsExpired((byte) 1);
-            if(rdao.updateReader(iReader)){
-                JOptionPane.showMessageDialog(this, "Đã gia hạn", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-                ReaderList.get(row).setIsExpired((byte) 1);
-                loadDataTable();
-            } else {
-                JOptionPane.showMessageDialog(this, "Gia hạn thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
-            }      
+        int row = readersTable.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một người đọc trong danh sách", "Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
-             JOptionPane.showMessageDialog(this, "Đã gia hạn", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
-        }         
-       }
+            Reader iReader = new Reader();
+            iReader = ReaderList.get(row);
+            if (iReader.getIsBlocked() == 1) {
+                JOptionPane.showMessageDialog(this, "Thẻ đã bị khoá", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (iReader.getIsExpired() != 1) {
+                    iReader.setIsExpired((byte) 1);
+                    if (rdao.updateReader(iReader)) {
+                        JOptionPane.showMessageDialog(this, "Đã gia hạn", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                        ReaderList.get(row).setIsExpired((byte) 1);
+                        loadDataTable();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Gia hạn thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Đã gia hạn", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_extensionButtonActionPerformed
 
     private void blockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blockButtonActionPerformed

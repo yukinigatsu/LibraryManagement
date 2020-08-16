@@ -81,7 +81,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         keywordTextField = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         readersTable = new javax.swing.JTable();
-        idReaderLabel = new javax.swing.JLabel();
+        typeSearchComboBox = new javax.swing.JComboBox<>();
         limitLabel = new javax.swing.JLabel();
         limitValueLabel = new javax.swing.JLabel();
         addButton = new javax.swing.JButton();
@@ -145,7 +145,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(idBookLabel)
                     .addComponent(clearButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nameBookLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameBookLabel1))
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -188,8 +188,8 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(readersTable);
 
-        idReaderLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        idReaderLabel.setText("Mã thẻ");
+        typeSearchComboBox.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        typeSearchComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã thẻ", "Tên" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -200,8 +200,8 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(idReaderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(searchReaderButton)
@@ -218,7 +218,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                     .addComponent(keywordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchReaderButton)
                     .addComponent(clearButton)
-                    .addComponent(idReaderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(typeSearchComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addContainerGap())
@@ -274,7 +274,7 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(addButton)
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addContainerGap(404, Short.MAX_VALUE))
         );
 
         pack();
@@ -291,17 +291,28 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private void searchReaderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReaderButtonActionPerformed
         if (!keywordTextField.getText().isEmpty()) {
             ReaderList.clear();
+            if (typeSearchComboBox.getSelectedItem() == "Mã thẻ") {
                 Reader iReader = new Reader();
                 try {
                     iReader = rdao.findReaderById(Integer.parseInt(keywordTextField.getText()));
                     if (iReader != null) {
-                        ReaderList.add(iReader);             
+                        ReaderList.add(iReader);
+                                    
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                     
                 }
                 loadDataTable();
+            } else if (typeSearchComboBox.getSelectedItem() == "Tên") {
+                List<Reader> resultList = new ArrayList<Reader>();
+                resultList = rdao.findReaderByName(keywordTextField.getText());
+                if (resultList != null) {
+                    ReaderList.addAll(resultList);                  
+                   resultList.clear();
+                }
+                loadDataTable();
+            }
         }
         else{
             loadDataListReader();
@@ -397,7 +408,6 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton clearButton1;
     private javax.swing.JTextField enterIdBookTextField;
     private javax.swing.JLabel idBookLabel;
-    private javax.swing.JLabel idReaderLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -409,5 +419,6 @@ public class BorrowBookInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable readersTable;
     private javax.swing.JButton searchBookButton;
     private javax.swing.JButton searchReaderButton;
+    private javax.swing.JComboBox<String> typeSearchComboBox;
     // End of variables declaration//GEN-END:variables
 }

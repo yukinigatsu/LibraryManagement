@@ -77,6 +77,7 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         borowedBookTable = new javax.swing.JTable();
         returnButton = new javax.swing.JButton();
+        notificationLabel = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Trả sách");
@@ -175,6 +176,8 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        notificationLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -182,8 +185,10 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(returnButton)
                         .addGap(132, 132, 132)))
                 .addContainerGap())
@@ -194,7 +199,9 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(returnButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(notificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -288,23 +295,40 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_serchButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        
         int row = borowedBookTable.getSelectedRow();
-        if(row == -1){
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sách muốn trả!", "Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
             BorrowedBook iBorrowedBook = new BorrowedBook();
             iBorrowedBook = borrowedBookList.get(row);
-            iBorrowedBook.setIsReturn((byte) 1);
-            if(bbdao.updateBorrowedBook(iBorrowedBook)){
-                Book iBook = new Book();
-                iBook = bdao.findBookById(iBorrowedBook.getBook().getIdBook());
-                iBook.setStatus("availible");
-                bdao.updateBook(iBook);
-                borrowedBookList.remove(row);
-                loadDataBorrowedBookTable();
-            }else{
-                JOptionPane.showMessageDialog(this, "Trả sách thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            if (iBorrowedBook.isOverDue()) {
+                long days = iBorrowedBook.DateDiff();
+                int opt = JOptionPane.showConfirmDialog(this, "Sách đã quá hạn trả: " + String.valueOf(days) + " ngày.", "Thông báo", JOptionPane.YES_OPTION);
+                if (opt == JOptionPane.YES_OPTION) {
+                    iBorrowedBook.setIsReturn((byte) 1);
+                    if (bbdao.updateBorrowedBook(iBorrowedBook)) {
+                        Book iBook = new Book();
+                        iBook = bdao.findBookById(iBorrowedBook.getBook().getIdBook());
+                        iBook.setStatus("availible");
+                        bdao.updateBook(iBook);
+                        borrowedBookList.remove(row);
+                        loadDataBorrowedBookTable();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Trả sách thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } else {
+                iBorrowedBook.setIsReturn((byte) 1);
+                    if (bbdao.updateBorrowedBook(iBorrowedBook)) {
+                        Book iBook = new Book();
+                        iBook = bdao.findBookById(iBorrowedBook.getBook().getIdBook());
+                        iBook.setStatus("availible");
+                        bdao.updateBook(iBook);
+                        borrowedBookList.remove(row);
+                        loadDataBorrowedBookTable();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Trả sách thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    }
             }
         }
     }//GEN-LAST:event_returnButtonActionPerformed
@@ -318,6 +342,7 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField keywordTextField;
+    private javax.swing.JLabel notificationLabel;
     private javax.swing.JTable readersTable;
     private javax.swing.JButton returnButton;
     private javax.swing.JButton serchButton;

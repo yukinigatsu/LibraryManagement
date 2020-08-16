@@ -106,7 +106,6 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
         nameLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nameLabel.setText("Họ và tên:");
 
-        birthFormattedTextField.setText("01/01/2020");
         birthFormattedTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         genderButtonGroup.add(maleRadioButton);

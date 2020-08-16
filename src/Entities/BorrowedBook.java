@@ -2,6 +2,7 @@ package Entities;
 // Generated Aug 14, 2020 10:23:28 PM by Hibernate Tools 4.3.1
 
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -82,6 +83,29 @@ public class BorrowedBook  implements java.io.Serializable {
         return false;
     }
 
+//calculate days over due
+    public long DateDiff(){
+       
+        DateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date currentDate = new Date();
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            String startDate = simpleDateFormat.format(expiredDate);
+            String endDate = simpleDateFormat.format(currentDate);
+
+            date1 = simpleDateFormat.parse(startDate);
+            date2 = simpleDateFormat.parse(endDate);
+
+            long getDiff = currentDate.getTime() - date1.getTime();
+
+            long getDaysDiff = getDiff / (24 * 60 * 60 * 1000);
+             System.out.println(getDaysDiff);
+            return getDaysDiff;           
+        } catch (Exception e) {
+        }
+        return 0;
+    }
 }
 
 
