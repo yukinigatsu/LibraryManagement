@@ -182,8 +182,9 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(returnButton)
                         .addGap(132, 132, 132)))
                 .addContainerGap())
@@ -195,7 +196,7 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(returnButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,23 +289,40 @@ public class ReturnBookInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_serchButtonActionPerformed
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
-        
         int row = borowedBookTable.getSelectedRow();
-        if(row == -1){
+        if (row == -1) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn sách muốn trả!", "Thông báo", JOptionPane.ERROR_MESSAGE);
         } else {
             BorrowedBook iBorrowedBook = new BorrowedBook();
             iBorrowedBook = borrowedBookList.get(row);
-            iBorrowedBook.setIsReturn((byte) 1);
-            if(bbdao.updateBorrowedBook(iBorrowedBook)){
-                Book iBook = new Book();
-                iBook = bdao.findBookById(iBorrowedBook.getBook().getIdBook());
-                iBook.setStatus("availible");
-                bdao.updateBook(iBook);
-                borrowedBookList.remove(row);
-                loadDataBorrowedBookTable();
-            }else{
-                JOptionPane.showMessageDialog(this, "Trả sách thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+            if (iBorrowedBook.isOverDue()) {
+                long days = iBorrowedBook.DateDiff();
+                int opt = JOptionPane.showConfirmDialog(this, "Sách đã quá hạn trả: " + String.valueOf(days) + " ngày.", "Thông báo", JOptionPane.YES_OPTION);
+                if (opt == JOptionPane.YES_OPTION) {
+                    iBorrowedBook.setIsReturn((byte) 1);
+                    if (bbdao.updateBorrowedBook(iBorrowedBook)) {
+                        Book iBook = new Book();
+                        iBook = bdao.findBookById(iBorrowedBook.getBook().getIdBook());
+                        iBook.setStatus("availible");
+                        bdao.updateBook(iBook);
+                        borrowedBookList.remove(row);
+                        loadDataBorrowedBookTable();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Trả sách thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            } else {
+                iBorrowedBook.setIsReturn((byte) 1);
+                    if (bbdao.updateBorrowedBook(iBorrowedBook)) {
+                        Book iBook = new Book();
+                        iBook = bdao.findBookById(iBorrowedBook.getBook().getIdBook());
+                        iBook.setStatus("availible");
+                        bdao.updateBook(iBook);
+                        borrowedBookList.remove(row);
+                        loadDataBorrowedBookTable();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Trả sách thất bại!", "Thông báo", JOptionPane.ERROR_MESSAGE);
+                    }
             }
         }
     }//GEN-LAST:event_returnButtonActionPerformed

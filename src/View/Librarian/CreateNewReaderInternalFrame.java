@@ -90,7 +90,7 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
         nameTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         infoLabel.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        infoLabel.setText("THÔNG TIN NGƯỜI ĐỌC");
+        infoLabel.setText("THÔNG TIN CHI TIẾT NGƯỜI ĐỌC");
 
         typeLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         typeLabel.setText("Loại:");
@@ -106,7 +106,6 @@ public class CreateNewReaderInternalFrame extends javax.swing.JInternalFrame {
         nameLabel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nameLabel.setText("Họ và tên:");
 
-        birthFormattedTextField.setText("01/01/2020");
         birthFormattedTextField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         genderButtonGroup.add(maleRadioButton);
